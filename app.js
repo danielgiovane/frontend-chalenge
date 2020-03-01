@@ -4,7 +4,8 @@ const vm = new Vue({
     people: [],
     page: 0,
     hasNextPage: false,
-    produto: []
+    produto: [],
+    species: []
   },
 
   methods: {
@@ -22,48 +23,54 @@ const vm = new Vue({
     fetchPeople() {
       this.hasNextPage = false;
       let url = `https://swapi.co/api/people?page=${this.page}`;
-      console.log(url);
       fetch(url)
         .then(response => response.json())
         .then(response => {
-          this.getSpecies(response);
+          this.hasNextPage = response.next != null;
+          this.setSpecieName(response);
         })
     },
 
-    async getSpecies(response) {
+    async setSpecieName(response) {
       let results = response.results;
-
       for (index in results) {
-        results[index].imageUrl = "./img/star-wars.svg.png";
-        if (results[index].species.length > 0) {
-          let speciesUrl = results[index].species;
-          let name = await this.getSpecieName(speciesUrl, results);
-          results[index].species = name
-          this.people.push(results[index]);
-        } else {
-          results[index].species = "Não definido!";
-          this.people.push(results[index]);
-        }
+        let person = results[index];
+        let spacieName = this.getSpecieName(person);
+        person.species = spacieName;
+        person.imageUrl = "./img/star-wars.svg.png";
+        this.people.push(person);
       }
-      this.hasNextPage = response.count >= this.people.length;
-      console.log(`Count => ${response.count}`);
-      console.log(`Peplo.length => ${this.people.length}`);
     },
 
-    async getSpecieName(speciesUrl) {
-      let name;
-      await fetch(speciesUrl)
-        .then(specie => specie.json())
-        .then(specie => {
-          name = specie.name;
+    getSpecieName(person) {
+      for (index in this.species) {
+        let specieUrl = this.species[index].url;
+        if (person.species.length > 0 && person.species[0] == specieUrl) {
+          return this.species[index].name;
+        }
+      }
+      return 'Não definido';
+    },
+    async getSpecies(apiSpeciesUrl) {
+      let url = apiSpeciesUrl != null ? apiSpeciesUrl : `https://swapi.co/api/species?page=1`;
+      console.log(url);
+      await fetch(url)
+        .then(response => response.json())
+        .then(response => {
+          let results = response.results;
+          this.species = this.species.concat(results);
+          if (response.next != null) {
+            this.getSpecies(response.next);
+          } else {
+            this.page++;
+            this.fetchPeople(this.page);
+          }
         });
-      return name;
     }
   },
 
   created() {
-    this.page++;
-    this.fetchPeople(this.page);
+    this.getSpecies();
   }
 });
 

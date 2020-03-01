@@ -5,21 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="vue.js"></script>
   <title>Star wars</title>
 </head>
 
 <body>
   <header class="header">
-    <a href="/"> <img src="./img/star-wars.svg.png" alt="logo" height="120" width="280"> </a>
+    <a href="/"> <img src="./img/star-wars.svg.png" alt="logo" height="180" width="280"> </a>
   </header>
+  
 
-
-  <div id="app">
+  <div id="app" style="margin: 25px;">
 
     <div class="cards">
       <div v-for="p in people" class="card">
-        <img src="./img/star-wars.svg.png" height="160px" width="80%" alt="img-star-wars">
+        <img :src="p.imageUrl" height="160px" width="80%" alt="img-star-wars">
         <div class="detalhes">
           <div class="itens">
             <div>Nome</div>
@@ -30,19 +31,32 @@
             <p> {{p.birth_year}}</p>
           </div>
           <div class="itens">
-            <div>Especie</div>
+            <div>Espécie</div>
             <p>{{p.species}}</p>
           </div>
         </div>
         <button class="btn" v-on:click="showDetaile(p, $event)">Mais Detalhes</button>
       </div>
     </div>
-    <button class="btn" v-show="hasNextPage" v-on:click="nextPage($event)">Veja Mais</button>
+    <div class="center">
+      <button class="btn-next card"  v-show="hasNextPage" v-on:click="nextPage($event)">Veja mais <i class="material-icons">navigate_next</i></button>
+    </div>
   </div>
-
-  </div>
+    
+  <section class="modal">
+    <div class="modal-container">
+      <div class="modal_img">
+        
+      </div>
+      <div class="modal_dados">
+        <ul>
+          <li>{{produto}}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
 </body>
-<script src="script.js"></script>
+<script src="app.js"></script>
 
 </html>
