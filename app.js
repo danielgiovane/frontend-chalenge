@@ -5,16 +5,22 @@ const vm = new Vue({
     page: 0,
     hasNextPage: false,
     produto: [],
-    species: []
+    species: [],
+    person: null,
+    showPersonDetaile: false,
+    nome: 'daniel'
   },
 
   methods: {
-
-    showDetaile: function (id, event) {
-      console.log(id);
-      this.produto = id;
+    showDetaile: function (person, event) {
+      this.showPersonDetaile = true;
+      this.person = person;
+      console.log(person);
     },
-
+    closePesonDetaile: function (event) {
+      this.showPersonDetaile = false;
+      console.log(this.showPersonDetaile);
+    },
     nextPage: function (event) {
       this.page++;
       this.fetchPeople(this.page);
@@ -38,6 +44,8 @@ const vm = new Vue({
         let spacieName = this.getSpecieName(person);
         person.species = spacieName;
         person.imageUrl = "./img/star-wars.svg.png";
+        person.imgUrl = "./img/star_wars1.jpg"
+        this.person = person;
         this.people.push(person);
       }
     },

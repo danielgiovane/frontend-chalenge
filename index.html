@@ -14,14 +14,14 @@
   <header class="header">
     <a href="/"> <img src="./img/star-wars.svg.png" alt="logo" height="180" width="280"> </a>
   </header>
-  
+
 
   <div id="app" style="margin: 25px;">
 
     <div class="cards">
       <div v-for="p in people" class="card">
         <img :src="p.imageUrl" height="160px" width="80%" alt="img-star-wars">
-        <div class="detalhes">
+        <div class="details">
           <div class="itens">
             <div>Nome</div>
             <h3> {{p.name}} </h3>
@@ -39,22 +39,43 @@
       </div>
     </div>
     <div class="center">
-      <button class="btn-next card"  v-show="hasNextPage" v-on:click="nextPage($event)">Veja mais <i class="material-icons">navigate_next</i></button>
+      <button class="btn-next card" v-show="hasNextPage" v-on:click="nextPage($event)">Veja mais</button>
+    </div>
+
+    <div class="full-person-detaile" v-on:click="closePesonDetaile($event)" v-show="showPersonDetaile">
+      <div class="detaile-container">
+       <div class="header-taile">
+        <img class="person-image" :src="person.imgUrl" alt="star-wars">
+        <div class="details"> 
+          <h2>Detalhes</h2>
+          <div class="item">
+            <p>Nome</p>
+            <p>{{person.name}} </p>
+          </div>
+          <div class="itens">
+            <p>Nascimento</p>
+            <p> {{person.birth_year}}</p>
+          </div>
+          <div class="itens">
+            <p>Espécie</p>
+            <p> {{person.species}}</p>
+          </div>
+          <div class="itens">
+            <p>Genero</p>
+            <p> {{person.gender}}</p>
+          </div>
+          <div class="itens">
+            <p>Cor do cabelo</p>
+            <p> {{person.hair_color}}</p>
+          </div>
+        </div>
+       </div>
+       <div class="description">
+
+       </div>
+      </div>
     </div>
   </div>
-    
-  <section class="modal">
-    <div class="modal-container">
-      <div class="modal_img">
-        
-      </div>
-      <div class="modal_dados">
-        <ul>
-          <li>{{produto}}</li>
-        </ul>
-      </div>
-    </div>
-  </section>
 
 </body>
 <script src="app.js"></script>

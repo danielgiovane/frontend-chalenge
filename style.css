@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-body, .modal{
+body, .full-person-detaile{
   background-color: #000;
   background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 10px), radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 5px), radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 10px), radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 5px);
   background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
@@ -21,10 +21,6 @@ body, .modal{
 .header a img{
   margin: 40px 0;
   border-bottom: 1px solid #555;
-}
-
-h1{
-  color: #fff;
 }
 
 .cards{
@@ -70,16 +66,23 @@ h1{
   cursor: pointer;
   max-width: 250px;
   margin: 25px auto;
-  padding: 12px;
+  padding: 10px;
   display: block;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.detalhes .itens{
+.details .itens{
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 16px 0;
 }
 
-.detalhes .itens div:nth-child(1){
+
+.details .itens:last-child{
+  border: none;
+}
+.details h3,
+.details .itens div:nth-child(1){
   color: #777;
   font-size: 16px;
   line-height: 24px;
@@ -87,9 +90,57 @@ h1{
   font-weight: normal;
 }
 
-.detalhes .itens div:nth-child(2) p:nth-last-child(2){
-  color: #000;
+.details .itens div:nth-child(2){
+  color: #555;
   font-weight: bold;
   font-size: 16px;
 }
 
+.full-person-detaile {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.68);
+  overflow: scroll; 
+}
+.full-person-detaile .detaile-container {
+  background-color: #fff;
+  position: relative;
+  width: 100%;
+  margin: 40px auto;
+  max-width: 85%;
+}
+
+.full-person-detaile .detaile-container .header-taile {
+  display: flex;
+  width: 100%;
+}
+.full-person-detaile .description {
+  width: 100%;
+  height: 250px;
+  box-sizing: border-box;
+  padding: 24px;
+
+}
+.full-person-detaile .person-image {
+  width: 100%;
+  max-width: 325px;
+}
+.full-person-detaile .details {
+  padding: 24px;
+  width: 100%;
+}
+
+@media (max-width: 580px) {
+  .full-person-detaile .detaile-container .header-taile {
+    display: block;
+  }
+  .full-person-detaile .person-image {
+    max-width: 100%;
+  }
+  .full-person-detaile .details {
+    max-width: 100%;
+  }
+}
