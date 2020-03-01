@@ -17,7 +17,12 @@
 
 
   <div id="app" style="margin: 25px;">
-
+    <div v-if="isLoading"  class="loading">
+      <div class="loading-indicator">
+        <span>Loading...</span>
+      </div>
+    </div>
+    
     <div class="cards">
       <div v-for="p in people" class="card">
         <img :src="p.imageUrl" height="160px" width="80%" alt="img-star-wars">
@@ -41,37 +46,65 @@
     <div class="center">
       <button class="btn-next card" v-show="hasNextPage" v-on:click="nextPage($event)">Veja mais</button>
     </div>
-
-    <div class="full-person-detaile" v-on:click="closePesonDetaile($event)" v-show="showPersonDetaile">
+    
+    <div v-if="showPersonDetaile" class="full-person-detaile" v-on:click="closePesonDetaile($event)">
       <div class="detaile-container">
        <div class="header-taile">
         <img class="person-image" :src="person.imgUrl" alt="star-wars">
         <div class="details"> 
           <h2>Detalhes</h2>
-          <div class="item">
-            <p>Nome</p>
-            <p>{{person.name}} </p>
-          </div>
-          <div class="itens">
-            <p>Nascimento</p>
-            <p> {{person.birth_year}}</p>
-          </div>
-          <div class="itens">
-            <p>Espécie</p>
-            <p> {{person.species}}</p>
-          </div>
-          <div class="itens">
-            <p>Genero</p>
-            <p> {{person.gender}}</p>
-          </div>
-          <div class="itens">
-            <p>Cor do cabelo</p>
-            <p> {{person.hair_color}}</p>
+          <div class="person-detaile">
+            <div class="person-info">
+              <div class="item">
+                <p>Nome</p>
+                <p>{{person.name}} </p>
+              </div>
+              <div class="itens">
+                <p>Nascimento</p>
+                <p> {{person.birth_year}}</p>
+              </div>
+              <div class="itens">
+                <p>Espécie</p>
+                <p> {{person.species}}</p>
+              </div>
+              <div class="itens">
+                <p>Genero</p>
+                <p> {{person.gender}}</p>
+              </div>
+              <div class="itens">
+                <p>Cor do cabelo</p>
+                <p> {{person.hair_color}}</p>
+              </div>
+              <div class="itens">
+                <p>Cor dos olhos</p>
+                <p> {{person.eye_color}}</p>
+              </div>
+            </div>
+
+            <div class="person-info">
+              <div class="item">
+                <p>Altura</p>
+                <p>{{person.height}} </p>
+              </div>
+              <div class="itens">
+                <p>Peso</p>
+                <p> {{person.mass}}</p>
+              </div>
+              <div class="itens">
+                <p>Cor da pele</p>
+                <p> {{person.skin_color}}</p>
+              </div>
+              <div class="itens">
+                <p>Origin</p>
+                <p> {{person.homeworld}}</p>
+              </div>
+              <div class="itens">
+                <p>Filmes</p>
+                <p> {{person.films}}</p>
+              </div>
+            </div>
           </div>
         </div>
-       </div>
-       <div class="description">
-
        </div>
       </div>
     </div>

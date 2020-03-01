@@ -4,22 +4,21 @@ const vm = new Vue({
     people: [],
     page: 0,
     hasNextPage: false,
-    produto: [],
     species: [],
+    films: [],
+    planets: [],
     person: null,
     showPersonDetaile: false,
-    nome: 'daniel'
+    isLoading: true
   },
 
   methods: {
     showDetaile: function (person, event) {
       this.showPersonDetaile = true;
       this.person = person;
-      console.log(person);
     },
     closePesonDetaile: function (event) {
       this.showPersonDetaile = false;
-      console.log(this.showPersonDetaile);
     },
     nextPage: function (event) {
       this.page++;
@@ -27,6 +26,7 @@ const vm = new Vue({
     },
 
     fetchPeople() {
+      this.isLoading = true;
       this.hasNextPage = false;
       let url = `https://swapi.co/api/people?page=${this.page}`;
       fetch(url)
@@ -34,6 +34,7 @@ const vm = new Vue({
         .then(response => {
           this.hasNextPage = response.next != null;
           this.setSpecieName(response);
+          this.isLoading = false;
         })
     },
 
@@ -45,7 +46,8 @@ const vm = new Vue({
         person.species = spacieName;
         person.imageUrl = "./img/star-wars.svg.png";
         person.imgUrl = "./img/star_wars1.jpg"
-        this.person = person;
+        person = this.setFilmsName(person);
+        person = this.setPlanetName(person);
         this.people.push(person);
       }
     },
@@ -59,9 +61,23 @@ const vm = new Vue({
       }
       return 'Não definido';
     },
+
+    setFilmsName(person) {
+      let filmsName = "";
+      for (index in this.films) {
+        let filmUrl = this.films[index].url;
+        for(personFilmIndex in person.films) {
+          if(person.films[personFilmIndex] == filmUrl) {
+            filmsName = filmsName.concat(`${this.films[index].title}, `);
+          }
+        }
+      }
+      person.films = filmsName;
+      return person;
+    },
+
     async getSpecies(apiSpeciesUrl) {
       let url = apiSpeciesUrl != null ? apiSpeciesUrl : `https://swapi.co/api/species?page=1`;
-      console.log(url);
       await fetch(url)
         .then(response => response.json())
         .then(response => {
@@ -74,12 +90,51 @@ const vm = new Vue({
             this.fetchPeople(this.page);
           }
         });
+    },
+
+    async getFilms(urlFilms){
+      let url = urlFilms != null ?  urlFilms : `https://swapi.co/api/films`
+      await fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        let results = response.results;
+        this.films = this.films.concat(results);
+        if(response.next != null){
+          this.getFilms(response.next);
+        }
+        this.getSpecies();
+      });
+    },
+
+    async getPlanets(urlPlanets){
+      let url = urlPlanets != null ?  urlPlanets : `https://swapi.co/api/planets`
+      await fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        let results = response.results;
+        this.planets = this.planets.concat(results);
+        if(response.next != null){
+          this.getPlanets(response.next);
+        } else {
+          this.getFilms();
+        }
+      });
+    },
+
+    setPlanetName(person){
+      for (index in this.planets){
+        if(this.planets[index].url == person.homeworld){
+          person.homeworld = this.planets[index].name;
+          return person;
+        }
+      }
+      return person;
     }
+
   },
 
   created() {
-    this.getSpecies();
+    this.getPlanets();
   }
 });
-
 

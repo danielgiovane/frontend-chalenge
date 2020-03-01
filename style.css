@@ -124,6 +124,16 @@ body, .full-person-detaile{
   padding: 24px;
 
 }
+.person-detaile {
+  display: flex;
+}
+.details h2 {
+  margin-bottom: 24px;
+}
+.person-info {
+  flex: 1;
+  margin-left: 24px;
+}
 .full-person-detaile .person-image {
   width: 100%;
   max-width: 325px;
@@ -131,6 +141,24 @@ body, .full-person-detaile{
 .full-person-detaile .details {
   padding: 24px;
   width: 100%;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+}
+
+.loading .loading-indicator {
+  position: relative;
+  width: 100%;
+  max-width: 150px;
+  margin: 25% auto;
+  text-align: center;
+  color: #fff;
 }
 
 @media (max-width: 580px) {
