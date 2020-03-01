@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="vue.js"></script>
+  <title>Star wars</title>
+</head>
+
+<body>
+  <header class="header">
+    <a href="/"> <img src="./img/star-wars.svg.png" alt="logo" height="120" width="280"> </a>
+  </header>
+
+
+  <div id="app">
+
+    <div class="cards">
+      <div v-for="p in people" class="card">
+        <img src="./img/star-wars.svg.png" height="160px" width="80%" alt="img-star-wars">
+        <div class="detalhes">
+          <div class="itens">
+            <div>Nome</div>
+            <h3> {{p.name}} </h3>
+          </div>
+          <div class="itens">
+            <div>Nascimento</div>
+            <p> {{p.birth_year}}</p>
+          </div>
+          <div class="itens">
+            <div>Especie</div>
+            <p>{{p.species}}</p>
+          </div>
+        </div>
+        <button class="btn" v-on:click="showDetaile(p, $event)">Mais Detalhes</button>
+      </div>
+    </div>
+    <button class="btn" v-show="hasNextPage" v-on:click="nextPage($event)">Veja Mais</button>
+  </div>
+
+  </div>
+
+</body>
+<script src="script.js"></script>
+
+</html>

@@ -1,0 +1,89 @@
+*{
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+body, .modal{
+  background-color: #000;
+  background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 10px), radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 5px), radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 10px), radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 5px);
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+  box-sizing: border-box;
+}
+
+.header{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.header a img{
+  margin: 40px 0;
+  border-bottom: 1px solid #555;
+}
+
+h1{
+  margin-top: 60px;
+  font-family: Star Jedi;
+  border-top: 0;
+  border-left: 10px solid #fff;
+}
+
+.cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.card{
+  text-align: center;
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.card img {
+  background-color: #000;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.card h3{
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.card button{
+  padding: 8px 32px;
+  background-color: #111;
+  border-radius: 4px;
+  margin-top: 32px;
+  margin-bottom: 10px;
+  width: 80%;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.detalhes .itens{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 16px 0;
+}
+
+.detalhes .itens div:nth-child(1){
+  color: #777;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.7px;
+  font-weight: normal;
+}
+
+.detalhes .itens div:nth-child(2) p:nth-last-child(2){
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+}
+
